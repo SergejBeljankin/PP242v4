@@ -1,13 +1,9 @@
 package ru.beljankin.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.beljankin.spring.dao.PersonDAO;
 import ru.beljankin.spring.model.Person;
 
@@ -15,8 +11,12 @@ import ru.beljankin.spring.model.Person;
 @RequestMapping("/people")
 public class PeopleController {
 
+    private final PersonDAO personDAO;
     @Autowired
-    public PersonDAO personDAO;
+    public PeopleController(PersonDAO personDAO){
+        this.personDAO = personDAO;
+    }
+
 
 
     @GetMapping()
@@ -26,9 +26,9 @@ public class PeopleController {
 
         return "people/index"; // адрес ШАБЛОНА страницы в Java
     }
+
     @GetMapping("/new")
-    public String newPerson(Model model){
-        model.addAttribute("person", new Person());
+    public String newPerson(@ModelAttribute("person") Person person){
         return "people/new";
     }
 

@@ -5,8 +5,10 @@
     <title>Список людей</title>
 </head>
 <body>
+
 <div th:each="person : ${people}">
     <span th:text = "${person.getName()}">Value</span> <span th:text = "${person.getSurname()}"> Value</span><br />
 </div>
+
 </body>
 </html>
