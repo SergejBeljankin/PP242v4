@@ -1,9 +1,24 @@
 package ru.beljankin.spring.model;
 
+
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "person")
 public class Person {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "surname")
     private String surname;
+
+    @Column(name = "email")
     private String email;
 
     public Person() {

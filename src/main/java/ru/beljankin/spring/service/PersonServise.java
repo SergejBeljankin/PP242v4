@@ -1,8 +1,9 @@
-package ru.beljankin.spring.dao;
+package ru.beljankin.spring.service;
+
 
 import ru.beljankin.spring.model.Person;
 
-public interface PersonDAO {
+public interface PersonServise {
     Person select(int id);
     void save(Person person);
     void delete(int id);

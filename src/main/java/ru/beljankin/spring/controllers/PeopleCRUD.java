@@ -4,15 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.beljankin.spring.dao.PersonDAO;
+import ru.beljankin.spring.dao.PersonDAOImpl;
 import ru.beljankin.spring.model.Person;
 
 @Controller
 public class PeopleCRUD {
 
-    private final PersonDAO personDAO;
+    private final PersonDAOImpl personDAO;
     @Autowired
-    public PeopleCRUD(PersonDAO personDAO){
+    public PeopleCRUD(PersonDAOImpl personDAO){
         this.personDAO = personDAO;
     }
 

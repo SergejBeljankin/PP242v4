@@ -1,5 +1,6 @@
 package ru.beljankin.spring.config;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.CharacterEncodingFilter; // фильтры
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
