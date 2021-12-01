@@ -14,11 +14,11 @@ public class PersonDAO {
     {
         people = new ArrayList<>();
 
-        people.add(new Person(++PERSON_COUNT, "Ivan", "Petrov"));
-        people.add(new Person(++PERSON_COUNT, "Nokolaj", "Sidorov"));
-        people.add(new Person(++PERSON_COUNT, "Dmitrij", "Ivanov"));
-        people.add(new Person(++PERSON_COUNT, "Ilya", "Kuznetsov"));
-        people.add(new Person(++PERSON_COUNT, "Petr", "Romanov"));
+        people.add(new Person(++PERSON_COUNT, "Ivan", "Petrov", "petrov.ivan@gmail.com"));
+        people.add(new Person(++PERSON_COUNT, "Nokolaj", "Sidorov", "nikolay.sidorov@gmail.com"));
+        people.add(new Person(++PERSON_COUNT, "Dmitrij", "Ivanov", "dmitrij.ivanov@gmail.com"));
+        people.add(new Person(++PERSON_COUNT, "Ilya", "Kuznetsov", "ilya.kuznetsov@gmail.com"));
+        people.add(new Person(++PERSON_COUNT, "Petr", "Romanov", "petr.romanov@gmail.com"));
 
     }
 
@@ -42,5 +42,6 @@ public class PersonDAO {
         Person updatePerson = select(id);
         updatePerson.setName(personVariable.getName());
         updatePerson.setSurname(personVariable.getSurname());
+        updatePerson.setEmail(personVariable.getEmail());
     }
 }

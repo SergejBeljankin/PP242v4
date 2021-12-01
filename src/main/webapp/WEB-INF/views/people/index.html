@@ -5,7 +5,15 @@
     <title>Список людей</title>
 </head>
 <body>
-
+<table>
+    <tbody>
+    <th>
+        <td>Name</td>
+        <td>Surname</td>
+        <td>E-mail</td>
+    </th>
+    </tbody>
+</table>
 <div th:each="person : ${people}">
     <a th:href="@{/people/{id}(id=${person.getId()})}" th:text = "${person.getName()}">Value</a> <span th:text = "${person.getSurname()}"> Value</span><br />
 </div>
