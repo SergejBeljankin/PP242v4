@@ -10,7 +10,9 @@ import ru.beljankin.spring.model.Person;
 @Controller
 public class PeopleCRUD {
 
+
     private final PersonDAOImpl personDAO;
+
     @Autowired
     public PeopleCRUD(PersonDAOImpl personDAO){
         this.personDAO = personDAO;
@@ -23,7 +25,6 @@ public class PeopleCRUD {
 
         return "index"; // адрес ШАБЛОНА страницы в Java
     }
-
 
 
     @GetMapping("/{id}")

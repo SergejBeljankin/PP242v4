@@ -1,57 +1,52 @@
 package ru.beljankin.spring.dao;
 
-
 import ru.beljankin.spring.model.Person;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 @Transactional
+@Repository
 public class PersonDAOImpl implements PersonDAO {
 
-    @PersistenceContext(unitName = "entityManager")
+    @PersistenceContext
     private EntityManager entityManager;
 
-    private static int PERSON_COUNT;
-    private List<Person> people;
-
-    {
-        people = new ArrayList<>();
-
-        people.add(new Person(++PERSON_COUNT, "Ivan", "Petrov", "petrov.ivan@gmail.com"));
-        people.add(new Person(++PERSON_COUNT, "Nokolaj", "Sidorov", "nikolay.sidorov@gmail.com"));
-        people.add(new Person(++PERSON_COUNT, "Dmitrij", "Ivanov", "dmitrij.ivanov@gmail.com"));
-        people.add(new Person(++PERSON_COUNT, "Ilya", "Kuznetsov", "ilya.kuznetsov@gmail.com"));
-        people.add(new Person(++PERSON_COUNT, "Petr", "Romanov", "petr.romanov@gmail.com"));
-
-    }
-
+    @Override
     public List<Person> getAll(){
-        return people;
+        return entityManager.createQuery("from Person", Person.class).getResultList();
     }
 
-    public Person select(int id){
-        return people.stream().filter(people -> (people.getId() == id)).findAny().orElse(null);
+
+    @Override
+    public Person select(long id){
+        return entityManager.find(Person.class, id);
     }
 
+    @Override
     public void save(Person person){
         entityManager.persist(person);
-        person.setId(++PERSON_COUNT);
-        people.add(person);
     }
-    public void delete(int id){
-        people.removeIf(person -> person.getId() == id);
 
+    @Override
+    public void delete(long id){
+        entityManager.remove(getPerson(id));
     }
-    public void update(int id, Person personVariable){
-        Person updatePerson = select(id);
-        updatePerson.setName(personVariable.getName());
-        updatePerson.setSurname(personVariable.getSurname());
-        updatePerson.setEmail(personVariable.getEmail());
+
+    @Override
+    public void update(long id, Person personVariable){
+        Person person = getPerson(id);
+        person.setName(personVariable.getName());
+        person.setSurname(personVariable.getSurname());
+        person.setEmail(personVariable.getEmail());
+    }
+
+    @Override
+    public Person getPerson(long id) {
+        return entityManager.find(Person.class, id);
     }
 }

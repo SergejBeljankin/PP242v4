@@ -3,9 +3,13 @@ package ru.beljankin.spring.service;
 
 import ru.beljankin.spring.model.Person;
 
+import java.util.List;
+
 public interface PersonServise {
-    Person select(int id);
+    List<Person> getAll();
+    Person getPerson(long id);
+    Person select(long id);
     void save(Person person);
-    void delete(int id);
-    void update(int id, Person person);
+    void delete(long id);
+    void update(long id, Person person);
 }

@@ -8,6 +8,7 @@
 
 
 <form th:method="POST" th:action="@{/index}" th:object="${person}">
+
     <label for="name">Enter Name: </label>
     <input type="text" th:field="*{name}" id="name">
     <br/>

@@ -2,40 +2,46 @@ package ru.beljankin.spring.service;
 
 import ru.beljankin.spring.model.Person;
 import ru.beljankin.spring.dao.PersonDAO;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
+@Transactional
 public class PersonServiseImpl implements PersonServise{
 
-    @Autowired
     private PersonDAO personDAO;
 
-    @Transactional
     @Override
-    public Person select(int id) {
+    public Person select(long id) {
         return personDAO.select(id);
     }
 
-    @Transactional
     @Override
     public void save(Person person) {
         personDAO.save(person);
-
     }
 
-    @Transactional
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         personDAO.delete(id);
     }
 
-    @Transactional
+
     @Override
-    public void update(int id, Person person) {
+    public void update(long id, Person person) {
         personDAO.update(id, person);
+    }
 
+    @Override
+    public List<Person> getAll() {
+        return personDAO.getAll();
+    }
 
+    @Override
+    public Person getPerson(long id) {
+        return personDAO.getPerson(id);
     }
 }
