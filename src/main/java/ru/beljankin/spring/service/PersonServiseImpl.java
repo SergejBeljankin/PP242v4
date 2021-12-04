@@ -40,8 +40,4 @@ public class PersonServiseImpl implements PersonServise{
         return personDAO.getAll();
     }
 
-    @Override
-    public Person getPerson(long id) {
-        return personDAO.getPerson(id);
-    }
 }

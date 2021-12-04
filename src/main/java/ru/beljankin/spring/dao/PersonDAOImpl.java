@@ -34,19 +34,15 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public void delete(long id){
-        entityManager.remove(getPerson(id));
+        entityManager.remove(select(id));
     }
 
     @Override
     public void update(long id, Person personVariable){
-        Person person = getPerson(id);
+        Person person = select(id);
         person.setName(personVariable.getName());
         person.setSurname(personVariable.getSurname());
         person.setEmail(personVariable.getEmail());
     }
 
-    @Override
-    public Person getPerson(long id) {
-        return entityManager.find(Person.class, id);
-    }
 }

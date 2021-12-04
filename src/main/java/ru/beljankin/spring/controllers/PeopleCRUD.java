@@ -10,7 +10,6 @@ import ru.beljankin.spring.model.Person;
 @Controller
 public class PeopleCRUD {
 
-
     private final PersonDAOImpl personDAO;
 
     @Autowired
@@ -21,21 +20,7 @@ public class PeopleCRUD {
     @GetMapping(value = "/index")
     public String index(Model model){
         model.addAttribute("people", personDAO.getAll());
-        // получить всех людей из DAO и передать в представление
-
-        return "index"; // адрес ШАБЛОНА страницы в Java
-    }
-
-
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model){
-        model.addAttribute("person", personDAO.select(id));
-        return "/show";
-    }
-
-    @GetMapping("new")
-    public String newPerson(@ModelAttribute("person") Person person){
-        return "new";
+        return "index";
     }
 
     @PostMapping("/index")
@@ -44,11 +29,13 @@ public class PeopleCRUD {
         return "redirect:/index";
     }
 
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id){
-        model.addAttribute("person", personDAO.select(id));
-        return "/edit";
+
+    @GetMapping("new")
+    public String newPerson(@ModelAttribute("person") Person person){
+        return "new";
     }
+
+
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
         personDAO.update(id, person);
@@ -59,6 +46,12 @@ public class PeopleCRUD {
     public String delete(@PathVariable("id") int id) {
         personDAO.delete(id);
         return "redirect:/index";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id){
+        model.addAttribute("person", personDAO.select(id));
+        return "/edit";
     }
 
 }

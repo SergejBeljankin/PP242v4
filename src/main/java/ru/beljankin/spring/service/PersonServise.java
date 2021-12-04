@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface PersonServise {
     List<Person> getAll();
-    Person getPerson(long id);
     Person select(long id);
     void save(Person person);
     void delete(long id);
