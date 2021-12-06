@@ -14,6 +14,10 @@ public class PersonServiseImpl implements PersonServise{
 
     private PersonDAO personDAO;
 
+    public PersonServiseImpl(PersonDAO personDAO){
+        this.personDAO = personDAO;
+    }
+
     @Override
     public Person select(long id) {
         return personDAO.select(id);

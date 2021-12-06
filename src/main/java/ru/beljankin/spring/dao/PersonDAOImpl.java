@@ -1,5 +1,6 @@
 package ru.beljankin.spring.dao;
 
+import org.springframework.stereotype.Component;
 import ru.beljankin.spring.model.Person;
 
 import org.springframework.transaction.annotation.Transactional;

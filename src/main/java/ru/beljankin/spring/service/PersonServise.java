@@ -5,7 +5,7 @@ import ru.beljankin.spring.model.Person;
 
 import java.util.List;
 
-public interface PersonServise {
+    public interface PersonServise {
     List<Person> getAll();
     Person select(long id);
     void save(Person person);
