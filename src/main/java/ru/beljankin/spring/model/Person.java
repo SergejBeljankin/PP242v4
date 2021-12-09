@@ -3,6 +3,8 @@ package ru.beljankin.spring.model;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "person")
@@ -10,26 +12,31 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "password")
+    private String password;
 
-    @Column(name = "email")
-    private String email;
+
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "person_roles",
+//            joinColumns = @JoinColumn( name = "person_id"),
+//            inverseJoinColumns = @JoinColumn( name = "role_id")
+//    )
+//    private Set<Role> roles = new HashSet<>();
 
     public Person() {
     }
 
-    public Person(long id, String name, String surname, String email) {
+    public Person(long id, String name, String password) {
         this.id = id;
         this.name = name;
-        this.surname = surname;
-        this.email = email;
-
+        this.password = password;
     }
 
     public long getId() {
@@ -48,19 +55,19 @@ public class Person {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<Role> roles) {
+//        this.roles = roles;
+//    }
 }

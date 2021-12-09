@@ -5,6 +5,7 @@ import ru.beljankin.spring.model.Person;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
+import ru.beljankin.spring.model.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,8 +43,17 @@ public class PersonDAOImpl implements PersonDAO {
     public void update(long id, Person personVariable){
         Person person = select(id);
         person.setName(personVariable.getName());
-        person.setSurname(personVariable.getSurname());
-        person.setEmail(personVariable.getEmail());
+        person.setPassword(personVariable.getPassword());
     }
 
+    @Override
+    public void save(Role role) {
+        entityManager.persist(role);
+    }
+
+    @Override
+    public List<Person> findPersonByRole(String roleName) {
+        return entityManager.createQuery("select person from Person person inner join Role role on person.id = role.id where role.roles = :roleName", Person.class)
+                .setParameter("roleName", roleName).getResultList();
+    }
 }
