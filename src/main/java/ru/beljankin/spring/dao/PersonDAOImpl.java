@@ -10,6 +10,7 @@ import ru.beljankin.spring.model.Role;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Set;
 
 @Transactional
 @Repository
@@ -46,14 +47,16 @@ public class PersonDAOImpl implements PersonDAO {
         person.setPassword(personVariable.getPassword());
     }
 
-    @Override
-    public void save(Role role) {
-        entityManager.persist(role);
-    }
+
 
     @Override
     public List<Person> findPersonByRole(String roleName) {
         return entityManager.createQuery("select person from Person person inner join Role role on person.id = role.id where role.roles = :roleName", Person.class)
                 .setParameter("roleName", roleName).getResultList();
+    }
+
+    @Override
+    public void setRoles(Set<Role> roleSet) {
+//        entityManager.createQuery()
     }
 }

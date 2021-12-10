@@ -5,22 +5,27 @@ package ru.beljankin.spring.model;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name = "role")
+@Entity
+@Table(name = "role")
 public class Role {
 
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column
+    @Column(name = "roles")
     private String roles;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private Person person;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id")
+//    private Person person;
 
 //    @ManyToMany(mappedBy = "roles")
 //    private Set<Person> person;
+    @Transient
+    @ManyToMany(mappedBy = "role")
+    private Set<Person> users;
 
     public Role() {
     }

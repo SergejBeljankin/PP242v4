@@ -22,21 +22,32 @@ public class Person {
 
 
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "person_roles",
-//            joinColumns = @JoinColumn( name = "person_id"),
-//            inverseJoinColumns = @JoinColumn( name = "role_id")
-//    )
-//    private Set<Role> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "person_role",
+            joinColumns = @JoinColumn( name = "person_id"),
+            inverseJoinColumns = @JoinColumn( name = "role_id")
+    )
+    @Column
+    private Set<Role> roleSet = new HashSet<>();
 
     public Person() {
     }
 
+    public Person(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
     public Person(long id, String name, String password) {
         this.id = id;
         this.name = name;
         this.password = password;
+    }
+
+    public Person(String name, String password, Set<Role> roleSet) {
+        this.name = name;
+        this.password = password;
+        this.roleSet = roleSet;
     }
 
     public long getId() {
@@ -63,11 +74,11 @@ public class Person {
         this.password = password;
     }
 
-//    public Set<Role> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Set<Role> roles) {
-//        this.roles = roles;
-//    }
+    public Set<Role> getRoles() {
+        return roleSet;
+    }
+
+    public void setRoles(Set<Role> roleSet) {
+        this.roleSet = roleSet;
+    }
 }
