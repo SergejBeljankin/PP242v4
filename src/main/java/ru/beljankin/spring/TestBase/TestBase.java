@@ -7,6 +7,9 @@ import ru.beljankin.spring.model.Role;
 import ru.beljankin.spring.service.PersonServise;
 import ru.beljankin.spring.service.RoleServise;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
 public class TestBase {
     private final PersonServise personServise;
@@ -25,18 +28,36 @@ public class TestBase {
         Person person2 = new Person("Петр", "321");
         Person person3 = new Person("Семен", "100");
 
-        personServise.save(person1);
-        personServise.save(person2);
-        personServise.save(person3);
-
         Role role1 = new Role("ROLE_ADMIN");
         Role role2 = new Role("ROLE_USER");
         Role role3 = new Role("ROLE_MANAGER");
+
+        Set<Role> roleSet1 = new HashSet<>();
+        roleSet1.add(role1);
+
+        Set<Role> roleSet2 = new HashSet<>();
+        roleSet2.add(role2);
+        roleSet2.add(role3);
+
+        Set<Role> roleSet3 = new HashSet<>();
+        roleSet3.add(role3);
+
+        person1.setRoles(roleSet1);
+        person2.setRoles(roleSet2);
+        person3.setRoles(roleSet3);
+
+        System.out.println(person1.toString());
+        System.out.println(person2.toString());
+        System.out.println(person3.toString());
+
 
         roleServise.save(role1);
         roleServise.save(role2);
         roleServise.save(role3);
 
+        personServise.save(person1);
+        personServise.save(person2);
+        personServise.save(person3);
 
 
     }

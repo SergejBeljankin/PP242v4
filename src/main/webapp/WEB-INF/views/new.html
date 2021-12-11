@@ -16,7 +16,11 @@
     <label for="password">Введите пароль: </label>
     <input type="text" th:field="*{password}" id="password">
     <br/>
-
+    <select id="editRoles" name="rolesNames" multiple size="5" required>
+        <option value="ROLE_ADMIN"   adminSelect>ADMIN</option>
+        <option value="ROLE_USER"  userSelect>USER</option>
+        <option value="ROLE_MANAGER"  managerSelect>MANAGER</option>
+    </select>
     <input type="submit" value="Добавить!"/>
 </form>
 </body>

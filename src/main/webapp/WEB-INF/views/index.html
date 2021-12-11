@@ -11,6 +11,7 @@
     <tr>
         <td>Логин</td>
         <td>Пароль</td>
+        <td>Список Ролей</td>
         <td>Update</td>
         <td>Delete</td>
 
@@ -18,6 +19,7 @@
     <tr th:each="person : ${people}">
         <td th:text = "${person.getName()}">Name</td>
         <td th:text = "${person.getPassword()}">Password</td>
+        <td th:text = "${person.getRolesToString()}">Список ролей</td>
         <td><a th:href="@{/{id}/edit(id=${person.getId()})}">Update</a></td>
         <td><form th:method="DELETE" th:action="@{/{id}(id=${person.getId()})}">
             <input type="submit" value="Delete"/>

@@ -6,32 +6,32 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
+@Table(name = "t_role")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "role_id")
     private Long id;
 
-    @Column(name = "roles")
-    private String roles;
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id")
-//    private Person person;
+    @Column(name = "rolesName")
+    private String rolesName;
 
 //    @ManyToMany(mappedBy = "roles")
 //    private Set<Person> person;
+//    @Transient
+//    @ManyToMany(mappedBy = "t_role")
+
     @Transient
-    @ManyToMany(mappedBy = "role")
-    private Set<Person> users;
+    @ManyToMany(mappedBy = "roleSet")
+    @Column(name = "personSet")
+    private Set<Person> personSet;
 
     public Role() {
     }
 
-    public Role(String roles) {
-        this.roles = roles;
+    public Role(String rolesName) {
+        this.rolesName = rolesName;
     }
 
     public Long getId() {
@@ -43,21 +43,27 @@ public class Role {
     }
 
     public String getRoles() {
-        return roles;
+        return rolesName;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRoles(String rolesName) {
+        this.rolesName = rolesName;
     }
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", rolesName='" + rolesName + '\'' +
+                '}';
+    }
 
-//    public Set<Person> getPerson() {
-//        return person;
-//    }
+    public Set<Person> getPersonSet() {
+        return personSet;
+    }
 
-//    public void setUsers(Set<Person> person) {
-//        this.person = person;
-//    }
-
+    public void setPersonSet(Set<Person> person) {
+        this.personSet = person;
+    }
 
 }

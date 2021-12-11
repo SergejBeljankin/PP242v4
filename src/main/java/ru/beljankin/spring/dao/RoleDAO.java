@@ -4,4 +4,5 @@ import ru.beljankin.spring.model.Role;
 
 public interface RoleDAO {
     void save(Role role);
+    Role finRoleByString(String roleName);
 }

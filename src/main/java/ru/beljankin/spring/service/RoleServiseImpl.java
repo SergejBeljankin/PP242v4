@@ -18,4 +18,9 @@ public class RoleServiseImpl implements RoleServise{
     public void save(Role role) {
         roleDAO.save(role);
     }
+
+    @Override
+    public Role finRoleByString(String roleName) {
+        return roleDAO.finRoleByString(roleName);
+    }
 }

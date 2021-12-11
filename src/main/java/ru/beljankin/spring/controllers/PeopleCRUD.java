@@ -5,17 +5,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.beljankin.spring.model.Person;
+import ru.beljankin.spring.model.Role;
 import ru.beljankin.spring.service.PersonServise;
+import ru.beljankin.spring.service.RoleServise;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
 public class PeopleCRUD {
 
     private final PersonServise personServise;
+    private final RoleServise roleServise;
 
     @Autowired
-    public PeopleCRUD(PersonServise personServise){
+    public PeopleCRUD(PersonServise personServise, RoleServise roleServise){
         this.personServise = personServise;
+        this.roleServise = roleServise;
     }
 
     @GetMapping(value = "/index")
@@ -25,7 +34,20 @@ public class PeopleCRUD {
     }
 
     @PostMapping("/index")
-    public String create(@ModelAttribute("person") Person person){
+    public String create(@ModelAttribute("person") Person person
+            , @RequestParam("rolesNames") String[] rolesNames
+    ){
+        System.out.println(Arrays.toString(rolesNames));
+        Set<Role> roleSet = new HashSet<>();
+        if(rolesNames.length !=0){
+            for (String role: rolesNames) {
+                roleSet.add(roleServise.finRoleByString(role));
+            }
+        } else {
+            roleSet.add(roleServise.finRoleByString("ROLE_USER"));
+        }
+//        roleSet.add(roleServise.finRoleByString("ROLE_USER"));
+        person.setRoles(roleSet);
         personServise.save(person);
         return "redirect:/index";
     }

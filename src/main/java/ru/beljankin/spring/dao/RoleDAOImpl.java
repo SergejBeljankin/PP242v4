@@ -19,4 +19,11 @@ public class RoleDAOImpl implements RoleDAO {
         entityManager.persist(role);
     }
 
+    @Override
+    public Role finRoleByString(String roleName) {
+        return entityManager.createQuery("select role from Role role where role.rolesName =:roleName", Role.class)
+                .setParameter("roleName", roleName)
+                .getSingleResult();
+    }
+
 }
