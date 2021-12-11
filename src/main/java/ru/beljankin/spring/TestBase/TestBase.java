@@ -24,9 +24,9 @@ public class TestBase {
 
     @Autowired
     public void dataInitializer(){
-        Person person1 = new Person("Иван", "123");
-        Person person2 = new Person("Петр", "321");
-        Person person3 = new Person("Семен", "100");
+        Person person1 = new Person("petr", "123", "Петр", "Иванов", "p.ivanov@gmail.com");
+        Person person2 = new Person("ivan", "321", "Иван", "Петров", "i.petrov@yandex.ru");
+        Person person3 = new Person("semen", "100", "Семен", "Сидоров", "s.sidorov@bk.ru");
 
         Role role1 = new Role("ROLE_ADMIN");
         Role role2 = new Role("ROLE_USER");

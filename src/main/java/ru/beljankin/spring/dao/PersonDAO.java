@@ -12,6 +12,7 @@ public interface PersonDAO {
     void save(Person person);
     void delete(long id);
     void update(long id, Person person);
-    public void setRoles(Set<Role> roleSet);
+//    public void setRoles(Set<Role> roleSet);
     List<Person> findPersonByRole(String roleName);
+    Person findByUserName(String username);
 }

@@ -9,34 +9,34 @@ import ru.beljankin.spring.model.Role;
 import ru.beljankin.spring.service.PersonServise;
 import ru.beljankin.spring.service.RoleServise;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 
 @Controller
-public class PeopleCRUD {
+@RequestMapping("/admin")
+public class AdminController {
 
     private final PersonServise personServise;
     private final RoleServise roleServise;
 
     @Autowired
-    public PeopleCRUD(PersonServise personServise, RoleServise roleServise){
+    public AdminController(PersonServise personServise, RoleServise roleServise){
         this.personServise = personServise;
         this.roleServise = roleServise;
     }
 
-    @GetMapping(value = "/index")
+    @GetMapping()
     public String index(Model model){
         model.addAttribute("people", personServise.getAll());
-        return "index";
+        return "admin/users";
     }
 
-    @PostMapping("/index")
+    @PostMapping()
     public String create(@ModelAttribute("person") Person person
-            , @RequestParam("rolesNames") String[] rolesNames
-    ){
+            , @RequestParam("rolesNames") String[] rolesNames){
+
         System.out.println(Arrays.toString(rolesNames));
         Set<Role> roleSet = new HashSet<>();
         if(rolesNames.length !=0){
@@ -46,35 +46,34 @@ public class PeopleCRUD {
         } else {
             roleSet.add(roleServise.finRoleByString("ROLE_USER"));
         }
-//        roleSet.add(roleServise.finRoleByString("ROLE_USER"));
         person.setRoles(roleSet);
         personServise.save(person);
-        return "redirect:/index";
+        return "redirect:/admin";
     }
 
-
-    @GetMapping("new")
+    @GetMapping("new-person")
     public String newPerson(@ModelAttribute("person") Person person){
-        return "new";
+        return "admin/new-person";
     }
 
-
-    @PatchMapping("/{id}")
+//
+    @PatchMapping("/edit/{id}")
     public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id) {
         personServise.update(id, person);
-        return "redirect:/index";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         personServise.delete(id);
-        return "redirect:/index";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") int id){
         model.addAttribute("person", personServise.select(id));
-        return "/edit";
+        return "admin/edit";
     }
 
-}
+
+    }

@@ -17,11 +17,6 @@ public class Role {
     @Column(name = "rolesName")
     private String rolesName;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<Person> person;
-//    @Transient
-//    @ManyToMany(mappedBy = "t_role")
-
     @Transient
     @ManyToMany(mappedBy = "roleSet")
     @Column(name = "personSet")

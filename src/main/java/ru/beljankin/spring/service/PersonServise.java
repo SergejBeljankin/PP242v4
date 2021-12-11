@@ -11,4 +11,5 @@ import java.util.List;
     void save(Person person);
     void delete(long id);
     void update(long id, Person person);
+    Person findByUserName(String username);
 }

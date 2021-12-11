@@ -1,16 +1,13 @@
 package ru.beljankin.spring.dao;
 
-import org.springframework.stereotype.Component;
 import ru.beljankin.spring.model.Person;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
-import ru.beljankin.spring.model.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Set;
 
 @Transactional
 @Repository
@@ -43,7 +40,7 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public void update(long id, Person personVariable){
         Person person = select(id);
-        person.setName(personVariable.getName());
+        person.setUsername(personVariable.getUsername());
         person.setPassword(personVariable.getPassword());
     }
 
@@ -51,12 +48,15 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public List<Person> findPersonByRole(String roleName) {
-        return entityManager.createQuery("select person from Person person inner join Role role on person.id = role.id where role.roles = :roleName", Person.class)
+        return entityManager.createQuery("select person from Person person inner join Role role on person.id = role.id where role.rolesName = :roleName", Person.class)
                 .setParameter("roleName", roleName).getResultList();
     }
 
-    @Override
-    public void setRoles(Set<Role> roleSet) {
-//        entityManager.createQuery()
+//    @Override
+//    public void setRoles(Set<Role> roleSet) {
+//    }
+    public Person findByUserName(String username){
+        return entityManager.createQuery("select person from Person as person where person.username =:username", Person.class)
+                .setParameter("username", username).getSingleResult();
     }
 }
