@@ -2,12 +2,14 @@ package ru.beljankin.spring.model;
 
 
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "t_role")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,10 +49,7 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", rolesName='" + rolesName + '\'' +
-                '}';
+        return rolesName;
     }
 
     public Set<Person> getPersonSet() {
@@ -60,5 +59,11 @@ public class Role {
     public void setPersonSet(Set<Person> person) {
         this.personSet = person;
     }
+
+    @Override
+    public String getAuthority() {
+        return rolesName;
+    }
+
 
 }
